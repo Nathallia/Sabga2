@@ -1,0 +1,31 @@
+
+
+
+table,caption,tbody,tfoot,thead,tr,th,td
+{margin:0;padding:5px;border:0px;outline:0;font-size:100%;vertical-align:baseline;background:transparent;
+border-collapse: separate; border-style: groove}
+del{text-decoration:line-through}
+table{border-collapse:collapse;border-spacing:0}
+
+/*titulo*/
+
+.title-link-wrapper{display:block;font-size:1.33em;line-height:1.5em;padding-bottom:2px}
+.title-link{border-bottom:solid 1px #ccc}
+.title-link:link:hover,.title-link:link:focus{text-decoration:none;border-bottom:solid 1px #005bc6}
+.title-link:link:active{text-decoration:none}
+.abstract{padding:2px 0}
+
+/*imagen*/
+.record-index,.lirc .has-icons .record-index{display:block;float:left;width:2.25em;font-size:1.25em;line-height:1.75em;text-align:right;
+             margin:0 0 0 -3em}
+.has-icons .record-index{margin:0 0 0 -124px}
+.has-icons{padding:20px 0 20px 124px}
+.record-icon,.folder-list .image-result{position:absolute;top:10px;left:-90px;width:80px;text-align:center}
+.result-list-li{position:relative;padding:0px 0 15px;vertical-align:middle;}
+
+.result-list-li{display:block}
+.divLibros
+{
+    position: absolute;
+    left: 200px;
+}
