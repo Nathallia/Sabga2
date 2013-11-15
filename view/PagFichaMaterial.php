@@ -9,26 +9,15 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
         <link type="text/css" href="../bootstrap/css/result.css" rel="stylesheet" media="screen">
-   
-
+        
     </head>
     <body>
-
-
-
         <div class="fichaM">
-
-
             <ul class="result-list ">
-
-
-
                 <li class="result-list-li">
                 <center>
                     <h1>Ficha del material</h1>
                 </center>
-
-
                 <div class="iconLIbro">
 
                     <?php
@@ -91,7 +80,7 @@ and open the template in the editor.
                             if ($ejem == null) {
                                 $opcion = 'No hay ejemplares disponibles';
                             } else {
-                                $opcion = '<a  class="btn btn-inverse" href="?id=' . $fic['id_material'] . '&action=add" onclick="alert("se agrego")">Agregar a Reservas</a> ';
+                                $opcion = '<a  class="btn btn-inverse" onclick="alert("se agrego")"  href="?id=' . $fic['id_material'] . '&action=add">Agregar a Reservas</a> ';
                             }
                             echo '<br><br>';
                             echo $opcion;

@@ -50,8 +50,8 @@ function buscarMate() { //esta es la funcion que envia los datos
     {
         ajax.open("POST", "../Controller/PagresultadoController.php", true);
         //mostramos una imagen mientras cargamos el resultado de la consulta
-        divResultado.innerHTML = '<img src="images/ajax.gif">';
-        ajax.onreadystatechange = function() {
+         divResultado.innerHTML = '<div class="progress progress-striped"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span></div>';
+       ajax.onreadystatechange = function() {
             if (ajax.readyState == 4) {
                 //visualizamos el resultado correscpondiente
                 divResultado.innerHTML = ajax.responseText

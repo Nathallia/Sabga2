@@ -1,5 +1,23 @@
 <?php
 
+class cancelar
+{
+
+    public function cancelar_reserva($idRes,$idEjem)
+    {
+     $link = mysqli_connect("localhost", "root", "", "sabgab");
+     
+     $mySQlcancelar = "call cancelarreserva($idRes,$idEjem)";
+    if (mysqli_query($link, $mySQlcancelar)) {
+        echo '';
+    } else {
+        echo '-->No';
+    }
+    mysqli_close($link);
+    } 
+}
+
+
 session_start();
 
 if (isset($_GET['material']) && isset($_GET['doc'])) {
@@ -70,6 +88,27 @@ if (isset($_GET['material']) && isset($_GET['doc'])) {
 } else {
     echo 'vacio carrito';
 }
+
+
+  if(isset($_POST['Nreserva']) && isset($_POST['Nejemplar']) && isset($_POST['Ndoc'])&& isset($_POST['Ncorreo']))
+{
+    
+//    $newCan=new cancelar();
+//    $cancelar=$newCan->cancelar_reserva($_POST['Nreserva'], $_POST['Nejemplar']);
+//      echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><strong> a cancelado la reserva.</strong></div></div>';
+////   
+   
+  echo 'idreserva ->'.$_POST['Nreserva'];
+  echo 'id ejemplar->'.$_POST['Nejemplar'];
+  echo '<br> documento: '.$_POST['Ndoc'];
+  echo '<br> correo: '.$_POST['Ncorreo'];
+}
+else 
+{
+    echo 'vacio';
+}
+
+
 
 
 

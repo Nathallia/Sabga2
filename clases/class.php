@@ -1,155 +1,144 @@
 <?php
 
+class Trabajo {
 
+    private $pdo;
+    private $datos;
 
-class Trabajo
-  {
-     private $pdo;
-     private $datos;
+    public function __construct() {
 
-    public function __construct(){
+        $this->datos = array();
+        $host = "localhost";
+        $db = "sabgab";
+        $username = "root";
+        $password = "";
+        $dsn = "mysql:host=$host;dbname=$db";
 
-                 $this->datos=array();
-                 $host="localhost";
-                 $db="sabgab";
-                 $username="root";
-                 $password="";
-                 $dsn="mysql:host=$host;dbname=$db";
-
-                 try{
-                     $this->pdo=new PDO($dsn,$username,$password);
-                     $this->pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
-                 }
-                  catch (Exeption $e){
-                      $this->pdo=null;
-                      error_log("Error en la conexión a la bd". $e->getMessage());
-                  }
+        try {
+            $this->pdo = new PDO($dsn, $username, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        } catch (Exeption $e) {
+            $this->pdo = null;
+            error_log("Error en la conexión a la bd" . $e->getMessage());
+        }
     }
 
+    //metodo para redireccionar cuando no se aga GET.
+    private function _redirect() {
 
-   //metodo para redireccionar cuando no se aga GET.
-    private function _redirect(){
+        return header("Location:index.php");
+    }
 
-           return header("Location:index.php");
+    public function getProductos() {
 
-      }
-
-    public function getProductos(){
-
-       $sql="SELECT id_material,codigo_clasificacion,titulo,publicacion from tbl_material
+        $sql = "SELECT id_material,codigo_clasificacion,titulo,publicacion from tbl_material
   				ORDER BY rand() LIMIT 0,10";
 
-  	    $stm=$this->pdo->prepare($sql);
+        $stm = $this->pdo->prepare($sql);
         $stm->execute();
 
-         while ($row=$stm->fetch()) {
-         	$this->datos[]=$row;
-         }
+        while ($row = $stm->fetch()) {
+            $this->datos[] = $row;
+        }
 
-         return $this->datos;
+        return $this->datos;
     }
 
+    public function getProductosPorId($id = null) {
 
-    public function getProductosPorId($id=null){
+        $id = (int) $id;
+        //validacion para que solo se pueda entrar a alchivo pro.php via get sino se
+        //redireciona llamanedo el metodo _redirect();.
 
-            $id=(int)$id;
-          //validacion para que solo se pueda entrar a alchivo pro.php via get sino se
-           //redireciona llamanedo el metodo _redirect();.
+        if (empty($id) OR !$id) {
 
-            if (empty($id) OR !$id) {
+            $this->_redirect();
+        }
 
-                  $this->_redirect();
-            }
+        $stm = $this->pdo->prepare("SELECT id_material,codigo_clasificacion,titulo,publicacion from tbl_material
+                                      WHERE id_material='" . $id . "'");
+        $stm->execute();
 
-            $stm=$this->pdo->prepare("SELECT id_material,codigo_clasificacion,titulo,publicacion from tbl_material
-                                      WHERE id_material='".$id."'");
-            $stm->execute();
+        while ($row = $stm->fetch()) {
+            $this->datos[] = $row;
+        }
 
-            while ($row=$stm->fetch())
-            {
-              $this->datos[]=$row;
-            }
+        //validacion de get para detos que sean superior a los id de db
+        if (empty($this->datos)) {
+            $this->_redirect();
+        }
+        //***********************************************
 
-            //validacion de get para detos que sean superior a los id de db
-           if (empty($this->datos)){
-               $this->_redirect();
-           }
-           //***********************************************
-
-            return $this->datos;
+        return $this->datos;
     }
 
+    public function carro() {
 
+        if (isset($_GET["id"])) {
+            $id = strip_tags($_GET["id"]);
+        } else {
+            $id = 1;
+        }
 
-    public function carro(){
+        if (isset($_GET["action"])) {
+            $action = strip_tags($_GET["action"]);
+        } else {
+            $action = "";
+        }
 
-            if (isset($_GET["id"])) {
-                  $id=strip_tags($_GET["id"]);
-            }else{
-                  $id=1;
+        //*********************************
+        if (isset($_GET["su"])) {
+
+            $valor = strip_tags($_GET["su"]);
+            $valor = (int) $valor;
+
+            if ($valor == 0 OR $valor == '' OR !$valor) {
+
+                $action = 'removeProd';
             }
+        } else {
+            $valor = 0;
+        }
 
-            if (isset($_GET["action"])) {
-                      $action=strip_tags($_GET["action"]);
-            }else{
-              $action="";
-            }
+        //**********************************
+        switch ($action) {
+            case 'add':
+                if (isset($_SESSION["carro"][$id])) {
+                    $_SESSION["carro"][$id] ++;
+                } else
+                    $_SESSION["carro"][$id] = 1;
+                break;
 
-            //*********************************
-            if (isset($_GET["su"])) {
+            case 'remove':
 
-                  $valor=strip_tags($_GET["su"]);
-                  $valor=(int)$valor;
+                if (isset($_SESSION["carro"][$id])) {
 
-                  if ($valor==0 OR $valor=='' OR !$valor) {
+                    $_SESSION["carro"][$id] --;
 
-                        $action='removeProd';
-                  }
+                    if ($_SESSION["carro"][$id] == 0) {
 
-            }else{
-             $valor=0;
-            }
+                        unset($_SESSION["carro"][$id]);
+                    }
+                }
 
-            //**********************************
-            switch ($action) {
-                    case 'add':
-                        if(isset($_SESSION["carro"][$id]))
+                break;
 
-                                 $_SESSION["carro"][$id]++;
-                             
-                        else
-                                 $_SESSION["carro"][$id]=1;
-                    break;
+            case 'removeProd':
+                if (isset($_SESSION["carro"][$id])) {
 
-                    case 'remove':
+                    unset($_SESSION["carro"][$id]);
+                }
 
-                        if (isset($_SESSION["carro"][$id])) {
+                break;
 
-                                    $_SESSION["carro"][$id]--;
+            case 'empty':
+                unset($_SESSION["carro"][$id]);
 
-                                if ($_SESSION["carro"][$id]==0) {
+                break;
+        }
+    }
 
-                                          unset($_SESSION["carro"][$id]);
-                                }
-                        }
+}
 
-                    break;
-
-                    case 'removeProd':
-                        if (isset($_SESSION["carro"][$id])) {
-
-                                  unset($_SESSION["carro"][$id]);
-                        }
-
-                    break;
-
-                    case 'empty':
-                           unset($_SESSION["carro"][$id]);
-
-                    break;
-            }
-       }
-
-    }//end class
-
+//end class
 ?>

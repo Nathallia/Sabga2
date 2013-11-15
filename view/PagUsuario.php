@@ -13,6 +13,7 @@ and open the template in the editor.
         <script type="text/javascript" src="../bootstrap/js/jquery.js"></script>
         <script type="text/javascript" src="../bootstrap/js/bootstrap-tab.js"></script>
 
+
         <title>SABGA</title>
     </head>
     <body>
@@ -32,7 +33,7 @@ and open the template in the editor.
 
 
                 <div class="tab-pane active in" id="histo">
-                    <form class="form-horizontal" action='' method="POST">
+                    <form class="form-horizontal" action='' method="POST" name="formCancel">
                         <p class="lead">Historial de reservas</p>
 
 
@@ -56,6 +57,7 @@ and open the template in the editor.
                                             <th NOWRAP>Fecha Actual</th>
                                             <th NOWRAP>Fecha Reserva</th>
                                             <th NOWRAP>Estado Reserva</th>
+                                            <th NOWRAP>Cancelar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,8 +75,21 @@ and open the template in the editor.
                                                         echo 'Cancelada';
                                                     }
                                                     ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
+
+                                                <td NOWRAP>
+                                                    <?php
+                                                    echo '<button class = "btn btn-navbar" type = "button"
+                                                    onclick = "cancelacion('. ($reservasU['id_reserva']+0) .','. ($reservasU['id_ejemplar']+0) .','. $reservasU['documento_usuario'] .', 2323)">
+                                                    Cancelar
+                                                    </button>';
+                                                            ?>
+                                                    </td>
+                                                    </tr>
+
+                                                    <?php endforeach;
+                                                ?>
+
+
                                     </tbody>
                                 </table>
 

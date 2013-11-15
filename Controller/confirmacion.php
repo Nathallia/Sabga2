@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-     echo '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        echo '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -20,11 +20,8 @@ and open the template in the editor.
                                     </div>
                                     <form method="post" name="formuUsuario" class="login" > 
                                         <div class="modal-body">
-
-
-                                            <input style="margin-bottom: 15px;" type="number" placeholder="ingrese su documento" id="documento" name="documento"><br> 
-                                            <input style="margin-bottom: 15px;" type="text" placeholder="Ingrese correo electronico" id="correo" name="correo"><br>
-                                        </div>
+                                        agregoo
+                                          </div>
 
                                         <div class="modal-footer">
                                             <button name="login"  type="button" onClick="datosUsuarioRese()" class="btn btn-inverse" >Ingresar</button><br><br>
@@ -34,7 +31,7 @@ and open the template in the editor.
                             </div><!-- /.modal-dialog -->
                         </div>';
         ?>
-     <!-- Modal -->
-                        
+        <!-- Modal -->
+
     </body>
 </html>
