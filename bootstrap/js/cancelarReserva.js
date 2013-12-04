@@ -19,7 +19,7 @@ function objetoAjax(){
 //-------------------------------------------------------------------------
 
 //_________________________________________________________________________
-function cancelacion(res,ejem,doc2,Usercorreo){ //esta es la funcion que envia los datos de manea asincrona
+function cancelacion(res,ejem,doc2){ //esta es la funcion que envia los datos de manea asincrona
 	//div donde  mostrararemos  los datos de la consulta 
 	divResultado = document.getElementById('contenidoF');
 
@@ -27,7 +27,6 @@ function cancelacion(res,ejem,doc2,Usercorreo){ //esta es la funcion que envia l
 	idReserva= res;
         idEjemplar=ejem;
         documento=doc2;
-        correoU2=Usercorreo;
         
 	//instanciamos el objetoAjax
 	ajax=objetoAjax();
@@ -44,7 +43,7 @@ function cancelacion(res,ejem,doc2,Usercorreo){ //esta es la funcion que envia l
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	//enviando los valoress
-         ajax.send('Nreserva=' + idReserva + '&Nejemplar=' + idEjemplar + '&Ndoc=' + documento + '&Ncorreo=' + correoU2);
+         ajax.send('Nreserva=' + idReserva + '&Nejemplar=' + idEjemplar + '&Ndoc=' + documento);
 //	ajax.send('Nreserva='+ idReserva +'&Nejemplar='+ idEjemplar);
         
        

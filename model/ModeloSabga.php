@@ -7,11 +7,13 @@ class ModeloSabga {
 //        $link = $conex->conectarse();
 
 $link = mysqli_connect("localhost", "root", "", "sabgab");
+
         if ($rs = mysqli_query($link, "call BarraABC('$letra')")) {
             $posts = array();
             while ($row = mysqli_fetch_assoc($rs)) {
                 $posts[] = $row;
             }
+            
             mysqli_free_result($rs);
         }
         mysqli_close($link);

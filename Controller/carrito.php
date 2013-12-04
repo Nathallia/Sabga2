@@ -87,7 +87,7 @@ $obj = new Trabajo();
                                     <form method="post" name="formuUsuario" class="login" > 
                                         <div class="modal-body">
                                             <p>
-                                                Ser realizo su reserva con exito!!
+                                                Ser realizara la reserva de:
 
                                             </p>
                                         </div>
@@ -95,14 +95,16 @@ $obj = new Trabajo();
                                         <div class="modal-footer">
 
                                             <?php
+                                            
                                             foreach ($_SESSION["carro"] as $key => $valor) {
+
                                                 $fi = $obj->getProductosPorId($key);
                                                 foreach ($fi as $fila) {
                                                     $id = $fila["id_material"];
                                                     $producto = $fila["titulo"];
                                                     $precio = $fila["codigo_clasificacion"];
                                                 }
-
+                                             
                                                 echo $producto;
                                                 echo '<hr>';
                                             }
@@ -146,7 +148,7 @@ $obj = new Trabajo();
 
 
                                 <input name="bu" type="button" onclick="datosUsuarioLogin2(documento.value, correo.value);
-                                            alert('Se Agrego <?php
+                                                alert('Se Agrego <?php
                                 foreach ($_SESSION["carro"] as $key => $valor) {
                                     $fi = $obj->getProductosPorId($key);
                                     foreach ($fi as $fila) {
@@ -158,7 +160,7 @@ $obj = new Trabajo();
                                     echo $producto . ', ';
                                 }
                                 ?> a sus reservas');
-                                            enviarDMrese(documento.value, array.value);"
+                                                enviarDMrese(documento.value, array.value);"
                                        class="btn btn-inverse" value="Realizar Reservas"> 
                             </form> 
                         </div>

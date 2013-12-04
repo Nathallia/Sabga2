@@ -1,22 +1,20 @@
 <?php
 
-class cancelar
-{
+class cancelar {
 
-    public function cancelar_reserva($idRes,$idEjem)
-    {
-     $link = mysqli_connect("localhost", "root", "", "sabgab");
-     
-     $mySQlcancelar = "call cancelarreserva($idRes,$idEjem)";
-    if (mysqli_query($link, $mySQlcancelar)) {
-        echo '';
-    } else {
-        echo '-->No';
+    public function cancelar_reserva($idRes, $idEjem) {
+        $link = mysqli_connect("localhost", "root", "", "sabgab");
+
+        $mySQlcancelar = "call cancelarreserva($idRes,$idEjem)";
+        if (mysqli_query($link, $mySQlcancelar)) {
+            echo '';
+        } else {
+            echo '-->No';
+        }
+        mysqli_close($link);
     }
-    mysqli_close($link);
-    } 
-}
 
+}
 
 session_start();
 
@@ -33,79 +31,156 @@ if (isset($_GET['material']) && isset($_GET['doc'])) {
     $conex = new conexionSabga();
     $link = $conex->conectarse();
 
+    $cant = 0;
+    foreach ($mi_array AS $clave => $valor):
+        $cant = $cant + 1;
+    endforeach;
 
-    $mySQl = "call InsertarReserva($documentoUser,'" . $fechaR . "',1)";
-    if (mysqli_query($link, $mySQl)) {
+    $mySQlant = "  call cantidadEnDetalle($documentoUser,@total)";
+    $total = "select @total;";
 
-        foreach ($mi_array AS $clave => $valor):
-            mysqli_query($link, "call DetalleReserva($clave,$documentoUser,'" . $fechaR . "')");
-        endforeach;
+    if (mysqli_query($link, $mySQlant)) {
+
+$cantDeta=0;
+        if ($rs = mysqli_query($link, $total)) {
+            
+            while ($row = mysqli_fetch_assoc($rs)) {
+//                echo $row['@nat'];
+                $cantDeta = $row['@total'];
+                if ($cantDeta + $cant <= 3) {
+
+                    $mySQl = "call InsertarReserva($documentoUser,'" . $fechaR . "',1,@nat,@cant)";
+                    $mensa = "SELECT @nat;";
+
+                    if (mysqli_query($link, $mySQl)) {
+
+
+                        if ($rs = mysqli_query($link, $mensa)) {
+                            while ($row = mysqli_fetch_assoc($rs)) {
+//                echo $row['@nat'];
+                                echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong> ' . $row['@nat'] . '</strong></div></div>';
+                            }
+                          
+                        }
+
+                        foreach ($mi_array AS $clave => $valor):
+                            mysqli_query($link, "call DetalleReserva($clave,$documentoUser,'" . $fechaR . "')");
+                        endforeach;
+                    } else {
+                        echo '-->No';
+                    }
+              
+                }
+                else
+                {
+                         echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong>No se pudo realizar su reserva, solo se permite tener menos de 3 reservas vigentes</strong></div></div>';
+                           
+                }
+            }
+            mysqli_free_result($rs);
+        }
     } else {
         echo '-->No';
     }
     mysqli_close($link);
-    $docuR = $_SESSION["documentoUser"];
-    $correR = $_SESSION["correoUser"];
+
+
 
 
 
     unset($_SESSION["carro"]);
     include './PagPrincipalController.php';
 //include_once './PagUsuarioController.php?doc='.$_SESSION["documentoUser"].' &corre='.$_SESSION["correoUser"].'';
-    
 } else if (isset($_POST['material']) && isset($_POST['doc'])) {
-  
+
 // echo $_POST['doc'],$_POST['material'];
-  
-  $a = stripslashes($_POST['material']);
 
-   $mi_array = unserialize($_POST['material']);
+    $a = stripslashes($_POST['material']);
 
-   $documentoUser = $_POST['doc'];
+    $mi_array = unserialize($_POST['material']);
 
-  $fechaR = date("Y-m-d");
-   require '../model/conexionSabga.php';
+    $documentoUser = $_POST['doc'];
+
+
+    $fechaR = date("Y-m-d");
+    require '../model/conexionSabga.php';
     $conex = new conexionSabga();
     $link = $conex->conectarse();
 
+    $cant = 0;
+    foreach ($mi_array AS $clave => $valor):
+        $cant = $cant + 1;
+    endforeach;
 
-    $mySQl = "call InsertarReserva($documentoUser,'" . $fechaR . "',1)";
-    if (mysqli_query($link, $mySQl)) {
+    $mySQlant = "  call cantidadEnDetalle($documentoUser,@total)";
+    $total = "select @total;";
 
-        foreach ($mi_array AS $clave => $valor):
-            mysqli_query($link, "call DetalleReserva($clave,$documentoUser,'" . $fechaR . "')");
-        endforeach;
+    if (mysqli_query($link, $mySQlant)) {
+
+$cantDeta=0;
+        if ($rs = mysqli_query($link, $total)) {
+            
+            while ($row = mysqli_fetch_assoc($rs)) {
+//                echo $row['@nat'];
+                $cantDeta = $row['@total'];
+                if ($cantDeta + $cant <= 3) {
+
+                    $mySQl = "call InsertarReserva($documentoUser,'" . $fechaR . "',1,@nat,@cant)";
+                    $mensa = "SELECT @nat;";
+
+                    if (mysqli_query($link, $mySQl)) {
+
+
+                        if ($rs = mysqli_query($link, $mensa)) {
+                            while ($row = mysqli_fetch_assoc($rs)) {
+//                echo $row['@nat'];
+                                echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong> ' . $row['@nat'] . '</strong></div></div>';
+                            }
+                          
+                        }
+
+                        foreach ($mi_array AS $clave => $valor):
+                            mysqli_query($link, "call DetalleReserva($clave,$documentoUser,'" . $fechaR . "')");
+                        endforeach;
+                    } else {
+                        echo '-->No';
+                    }
+              
+                }
+                else
+                {
+                         echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong>No se pudo realizar su reserva, solo se permite tener menos de 3 reservas vigentes</strong></div></div>';
+                           
+                }
+            }
+            mysqli_free_result($rs);
+        }
     } else {
         echo '-->No';
     }
     mysqli_close($link);
-    $docuR = $_SESSION["documentoUser"];
-    $correR = $_SESSION["correoUser"];
+
+
+
+
+
     unset($_SESSION["carro"]);
-  
-    
     include './PagPrincipalController.php';
 } else {
-    echo 'vacio carrito';
+    echo '';
 }
 
 
-  if(isset($_POST['Nreserva']) && isset($_POST['Nejemplar']) && isset($_POST['Ndoc'])&& isset($_POST['Ncorreo']))
-{
-    
-//    $newCan=new cancelar();
-//    $cancelar=$newCan->cancelar_reserva($_POST['Nreserva'], $_POST['Nejemplar']);
-//      echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><strong> a cancelado la reserva.</strong></div></div>';
-////   
-   
-  echo 'idreserva ->'.$_POST['Nreserva'];
-  echo 'id ejemplar->'.$_POST['Nejemplar'];
-  echo '<br> documento: '.$_POST['Ndoc'];
-  echo '<br> correo: '.$_POST['Ncorreo'];
-}
-else 
-{
-    echo 'vacio';
+if (isset($_POST['Nreserva']) && isset($_POST['Nejemplar']) && isset($_POST['Ndoc'])) {
+
+    $newCan = new cancelar();
+    $cancelar = $newCan->cancelar_reserva($_POST['Nreserva'], $_POST['Nejemplar']);
+    echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong> a cancelado la reserva.</strong></div></div>';
+
+
+    include './PagUsuarioController.php';
+} else {
+    echo '';
 }
 
 

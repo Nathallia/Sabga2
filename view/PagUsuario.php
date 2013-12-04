@@ -69,7 +69,7 @@ and open the template in the editor.
                                                 <td NOWRAP><?php echo date("d-m-Y"); ?></td>
                                                 <td NOWRAP><?php echo $reservasU['fecha_reserva'] ?></td>
                                                 <td NOWRAP><?php
-                                                    if ($reservasU['estado_reserva'] == 1) {
+                                                    if ($reservasU['estado_reserva'] == 1 && $reservasU['estado_ejemplar']==3) {
                                                         echo 'Vigente';
                                                     } else {
                                                         echo 'Cancelada';
@@ -78,10 +78,15 @@ and open the template in the editor.
 
                                                 <td NOWRAP>
                                                     <?php
-                                                    echo '<button class = "btn btn-navbar" type = "button"
-                                                    onclick = "cancelacion('. ($reservasU['id_reserva']+0) .','. ($reservasU['id_ejemplar']+0) .','. $reservasU['documento_usuario'] .', 2323)">
+                                                    if ($reservasU['estado_reserva'] ==1 && $reservasU['estado_ejemplar']==3) {
+                                                         echo '<button class = "btn btn-navbar" type = "button"
+                                                    onclick = "cancelacion('. ($reservasU['id_reserva']+0) .','. ($reservasU['id_ejemplar']+0) .','. $reservasU['documento_usuario'] .')">
                                                     Cancelar
                                                     </button>';
+                                                    } else {
+                                                        echo '';
+                                                    }
+                                                   
                                                             ?>
                                                     </td>
                                                     </tr>

@@ -17,13 +17,23 @@ and open the template in the editor.
             $corr = $_POST['correo'];
 //            echo 'documento->'.$doc . '....correo->' . $corr;
         } else {
-            echo 'vacio';
+            echo '';
         }
 
         require_once '../model/ModeloSabga.php';
         $claUs = new ModeloSabga();
-        $nuevo = $claUs->DatosUsuario($doc,$corr);
-        $Dreserva = $claUs->Reserva($doc);
+        if(!empty($_SESSION['usuarioactual']))
+        {
+            $nuevo = $claUs->DatosUsuario($_SESSION["documentoUser"],$_SESSION["correoUser"]);
+            $Dreserva = $claUs->Reserva($_SESSION["documentoUser"]);
+        }
+        else
+        {
+            $nuevo = $claUs->DatosUsuario($doc,$corr);
+            $Dreserva = $claUs->Reserva($doc);
+        }
+        
+        
         if ($Dreserva != null) {
             $mensaje = '';
         } else {

@@ -39,6 +39,9 @@ and open the template in the editor.
         <script src="../bootstrap/js/funcionCarro.js" language="JavaScript"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script type="text/javascript" src="../bootstrap/js/cancelarReserva.js"></script>
+        <script type="text/javascript" src="../bootstrap/js/alert.js"></script>
+    
+        
         <?php
         if (isset($_GET['action']) && $_GET['action'] == 'add') {
             echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><strong> Se a añadido el material a su reserva.</strong></div></div>';
@@ -221,7 +224,7 @@ and open the template in the editor.
                                 </tr>
                                 <tr>
                                     <td><input type="radio" name="check" onclick="campo_chec.value = (this.checked) ? this.value : ''" value="codigo"></td>
-                                    <td><strong>Código</strong></td>
+                                    <td><strong>Código (CDU)</strong></td>
 
                                 </tr>
 
