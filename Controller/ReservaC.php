@@ -16,7 +16,7 @@ class cancelar {
 
 }
 
-session_start();
+@session_start();
 
 if (isset($_GET['material']) && isset($_GET['doc'])) {
 

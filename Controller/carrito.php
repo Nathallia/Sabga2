@@ -8,6 +8,7 @@ $obj = new Trabajo();
 <script src="http://static.scripting.com/github/bootstrap2/js/bootstrap-modal.js"></script>
 <script src="../bootstrap/js/enviarLOgRes.js"></script>
 <script src="../bootstrap/js/enviarDocGetR.js"></script>
+<script src="../bootstrap/js/modal.js"></script>
 <script type="text/javascript">
 
     function nameform() {

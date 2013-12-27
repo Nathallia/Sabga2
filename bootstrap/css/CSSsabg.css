@@ -39,6 +39,15 @@ box-shadow: 4px 3px 2px 2px rgba(0, 0, 0, 0.2);
 
 
 }
+
+/*@media screen and (max-width: 600px){
+div{
+width:100%;
+height:auto;
+margin-left:10px;
+}
+}*/
+
 .logo
 {
 /*    top: 30PX;
@@ -193,6 +202,9 @@ border-width: 1px;
 padding: 0px;
 overflow-x: auto;
 }
+
+
+
 .solas
 {
     position: absolute;
@@ -362,4 +374,3 @@ overflow-x: auto;
      color: #fff;
  }
  
- //--------------modal

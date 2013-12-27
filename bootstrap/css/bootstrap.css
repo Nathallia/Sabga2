@@ -4242,9 +4242,16 @@ input[type="submit"].btn.btn-mini {
   clear: both;
 }
 
+.contenidoHistorial{
+    height: 200px;
+   
+    width: 1000px;
+}
+
 .tab-content {
-  overflow: auto;
-  height: 1000px;
+
+
+  
 }
 
 .tabs-below > .nav-tabs,
