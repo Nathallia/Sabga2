@@ -52,6 +52,7 @@ $(function () {
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script type="text/javascript" src="../bootstrap/js/cancelarReserva.js"></script>
         <script type="text/javascript" src="../bootstrap/js/alert.js"></script>
+        <script type="text/javascript" src="../bootstrap/js/datosUser.js"></script>
 
 
         <?php
