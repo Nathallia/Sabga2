@@ -18,11 +18,11 @@ class reserva {
         }
         mysqli_close($link);
     }
-    
+
     public function ValidaDisponibilidad($material) {
-        
+
         $link = mysqli_connect("localhost", "root", "", "sabgab");
-        
+
         if ($rs = mysqli_query($link, "call EjemplarDiponible($material)")) {
             $posts = array();
             while ($row = mysqli_fetch_assoc($rs)) {
@@ -31,7 +31,8 @@ class reserva {
             mysqli_free_result($rs);
         }
         mysqli_close($link);
-       return $posts;
+        return $posts;
     }
-    
+
+
 }

@@ -9,7 +9,7 @@ class cancelar {
         if (mysqli_query($link, $mySQlcancelar)) {
             echo '';
         } else {
-            echo '-->No';
+            echo '-->No se calcelo';
         }
         mysqli_close($link);
     }
@@ -41,9 +41,9 @@ if (isset($_GET['material']) && isset($_GET['doc'])) {
 
     if (mysqli_query($link, $mySQlant)) {
 
-$cantDeta=0;
+        $cantDeta = 0;
         if ($rs = mysqli_query($link, $total)) {
-            
+
             while ($row = mysqli_fetch_assoc($rs)) {
 //                echo $row['@nat'];
                 $cantDeta = $row['@total'];
@@ -60,27 +60,23 @@ $cantDeta=0;
 //                echo $row['@nat'];
                                 echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong> ' . $row['@nat'] . '</strong></div></div>';
                             }
-                          
                         }
 
                         foreach ($mi_array AS $clave => $valor):
                             mysqli_query($link, "call DetalleReserva($clave,$documentoUser,'" . $fechaR . "')");
                         endforeach;
+                         unset($_SESSION["carro"]);
                     } else {
-                        echo '-->No';
+                        echo '-->No agrego detalle gt';
                     }
-              
-                }
-                else
-                {
-                         echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong>No se pudo realizar su reserva, solo se permite tener menos de 3 reservas vigentes</strong></div></div>';
-                           
+                } else {
+                    echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong>No se pudo realizar su reserva, solo se permite tener menos de 3 reservas vigentes</strong></div></div>';
                 }
             }
             mysqli_free_result($rs);
         }
     } else {
-        echo '-->No';
+        echo '-->No reserva gt';
     }
     mysqli_close($link);
 
@@ -88,7 +84,7 @@ $cantDeta=0;
 
 
 
-    unset($_SESSION["carro"]);
+   
     include './PagPrincipalController.php';
 //include_once './PagUsuarioController.php?doc='.$_SESSION["documentoUser"].' &corre='.$_SESSION["correoUser"].'';
 } else if (isset($_POST['material']) && isset($_POST['doc'])) {
@@ -117,9 +113,9 @@ $cantDeta=0;
 
     if (mysqli_query($link, $mySQlant)) {
 
-$cantDeta=0;
+        $cantDeta = 0;
         if ($rs = mysqli_query($link, $total)) {
-            
+
             while ($row = mysqli_fetch_assoc($rs)) {
 //                echo $row['@nat'];
                 $cantDeta = $row['@total'];
@@ -136,27 +132,24 @@ $cantDeta=0;
 //                echo $row['@nat'];
                                 echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong> ' . $row['@nat'] . '</strong></div></div>';
                             }
-                          
                         }
 
                         foreach ($mi_array AS $clave => $valor):
                             mysqli_query($link, "call DetalleReserva($clave,$documentoUser,'" . $fechaR . "')");
+
+                            unset($_SESSION["carro"]);
                         endforeach;
                     } else {
-                        echo '-->No';
+                        echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong>No se realizo la Reserva, documento o correo incorrectos</strong></div></div>';
                     }
-              
-                }
-                else
-                {
-                         echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong>No se pudo realizar su reserva, solo se permite tener menos de 3 reservas vigentes</strong></div></div>';
-                           
+                } else {
+                    echo '<div class="alertaN" ><div class="alert alert-success"><a class="close" data-dismiss="alert">x</a><strong>No se pudo realizar su reserva, solo se permite tener menos de 3 reservas vigentes</strong></div></div>';
                 }
             }
             mysqli_free_result($rs);
         }
     } else {
-        echo '-->No';
+        echo '-->No se reservo ps';
     }
     mysqli_close($link);
 
@@ -164,7 +157,6 @@ $cantDeta=0;
 
 
 
-    unset($_SESSION["carro"]);
     include './PagPrincipalController.php';
 } else {
     echo '';

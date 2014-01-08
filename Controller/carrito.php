@@ -88,7 +88,7 @@ $obj = new Trabajo();
                                     <form method="post" name="formuUsuario" class="login" > 
                                         <div class="modal-body">
                                             <p>
-                                                Ser realizara la reserva de:
+                                                Se realizara la reserva de:
 
                                             </p>
                                         </div>
@@ -96,7 +96,6 @@ $obj = new Trabajo();
                                         <div class="modal-footer">
 
                                             <?php
-                                            
                                             foreach ($_SESSION["carro"] as $key => $valor) {
 
                                                 $fi = $obj->getProductosPorId($key);
@@ -105,7 +104,7 @@ $obj = new Trabajo();
                                                     $producto = $fila["titulo"];
                                                     $precio = $fila["codigo_clasificacion"];
                                                 }
-                                             
+
                                                 echo $producto;
                                                 echo '<hr>';
                                             }
@@ -147,9 +146,10 @@ $obj = new Trabajo();
                                 <!--<button name="login"  type="button" onClick="datosUsuarioLogin()" class="btn btn-inverse" >Ingresar</button><br><br>-->
                                 <input style="visibility: hidden"    type="text"  id="array" name="array" value="<?php echo $compactada ?>"><br>
 
+                             
 
                                 <input name="bu" type="button" onclick="datosUsuarioLogin2(documento.value, correo.value);
-                                                alert('Se Agrego <?php
+                alert('Se Agrego <?php
                                 foreach ($_SESSION["carro"] as $key => $valor) {
                                     $fi = $obj->getProductosPorId($key);
                                     foreach ($fi as $fila) {
@@ -161,7 +161,7 @@ $obj = new Trabajo();
                                     echo $producto . ', ';
                                 }
                                 ?> a sus reservas');
-                                                enviarDMrese(documento.value, array.value);"
+                enviarDMrese(documento.value, array.value);"
                                        class="btn btn-inverse" value="Realizar Reservas"> 
                             </form> 
                         </div>

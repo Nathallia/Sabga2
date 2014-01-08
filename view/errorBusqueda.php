@@ -13,7 +13,7 @@ and open the template in the editor.
         <div class="resulBarra">
             <div class="plan">
                 <h3>
-                No se encontraron registros relacionados con su busqueda
+                No se encontraron registros relacionados con su búsqueda
             </h3>
             </div>
             
